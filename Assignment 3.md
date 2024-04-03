@@ -7,15 +7,15 @@
 6. create a new configuration file in the sites-available folder. ```sudo vim nginx-2420```
 7. Create a new server block inside the file. input into the file in vim, enter insert mode.
 ```
-    server {
-    listen 80;
-    server_name 24.144.81.66;
+    server { 
+    listen 80; # Listen for incoming connections on port 80
+    server_name 24.144.81.66; # Specify the server name or IP address that this server block will respond to
 
-    root /web/html/nginx-2420;
-    index index.html index.html;
+    root /web/html/nginx-2420; # Define the root directory where the website documents are stored
+    index index.html index.html; # Define the default index files to serve if no specific file is requested
 
-    location / {
-        try_files $uri $uri/ =404;
+    location / { # Configuration for handling requests to the root directory '/'
+        try_files $uri $uri/ =404; # Try to serve the requested file, and if it doesn't exist, return a 404 error
     }
 }
 ```
@@ -59,8 +59,8 @@ Exit insert mode and type in :wq This is your html file and should display All y
 ```sudo ln -s /etc/nginx/sites-available/nginx-2420 /etc/nginx/sites-enabled/```
 13. Check for errors in code. ```sudo nginx -t```
 14. Now you can enable nginx. Type in ```sudo systemctl start nginx``` systemctl
-15. Enable nginx on start up. ```sudo systemctl enable nginx```
-16. Check if status is on by ```sudo systemctl status nginx```
+15. Enable nginx on start up. ```sudo systemctl enable nginx``` enable allows nginx to run on start up.
+16. Check if status is on by ```sudo systemctl status nginx``` status checks the status of the service.
 17. If there are any errors on start up, you can also use ```journalctl -xeu nginx.service```
 18. Log into your website by entering the ip address. for instance, type in the url 24.144.81.66
 19. Should be able to see the html page.
