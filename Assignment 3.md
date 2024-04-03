@@ -1,12 +1,13 @@
-1. The first thing you want to do is update your arch linux. ```sudo pacman -Syu```
-2. Install vim by typing in the command ```sudo pacman -S vim```
+1. The first thing you want to do is update your arch linux. ```sudo pacman -Syu``` What it does is update arch linux. Sudo gives the user admin privilages. Pacman is package manager. and -Syu is 
+2. Install vim by typing in the command ```sudo pacman -S vim``` Vim is a text editor that allows us to type in syntax.
 3. Install nginx by typing in command ```sudo pacman -S nginx```. (if getting errors, do ```sudo nginx -t```)
-4. Create a new directory "/web/html/nginx-2420" that will act as your project root. The directory where your website documents will be stored. ```mkdir -p /web/html/nginx-2420```
+4. Create a new directory "/web/html/nginx-2420" that will act as your project root. The directory where your website documents will be stored. ```mkdir -p /web/html/nginx-2420``` mkdir create folders.
 5. Go to /etc/nginx/sites-available ```cd /etc/nginx/sites-available```
 6. type in ls to see if there is a sites-available folder. If not, create it. ```sudo mkdir sites-available```. Also create a site-enabled folder. ```sudo mkdir sites-enabled```
 6. create a new configuration file in the sites-available folder. ```sudo vim nginx-2420```
 7. Create a new server block inside the file. input into the file in vim, enter insert mode.
-    ```server {
+```
+    server {
     listen 80;
     server_name 24.144.81.66;
 
@@ -16,7 +17,9 @@
     location / {
         try_files $uri $uri/ =404;
     }
-}```
+}
+```
+
 8. exit insert mode by pressing the esc key. type :wq to save and quit file.
 9. Now go the /web/html/nginx-2420 folder. type cd to enter root folder. then ```cd /web/html/nginx-2420```
 10. create a html file named index.html. ```sudo vim index.html```
@@ -51,11 +54,11 @@
 </body>
 </html>
 ```
-Exit insert mode and type in :wq
+Exit insert mode and type in :wq This is your html file and should display All your base are belong to us.
 12. Now add a symbolic link to your /etc/nginx/sites-available/nginx-2420 and /etc/nginx/sites-enabled/
 ```sudo ln -s /etc/nginx/sites-available/nginx-2420 /etc/nginx/sites-enabled/```
 13. Check for errors in code. ```sudo nginx -t```
-14. Now you can enable nginx. Type in ```sudo systemctl start nginx```
+14. Now you can enable nginx. Type in ```sudo systemctl start nginx``` systemctl
 15. Enable nginx on start up. ```sudo systemctl enable nginx```
 16. Check if status is on by ```sudo systemctl status nginx```
 17. If there are any errors on start up, you can also use ```journalctl -xeu nginx.service```
